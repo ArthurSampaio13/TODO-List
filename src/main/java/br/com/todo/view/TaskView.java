@@ -84,6 +84,7 @@ public class TaskView {
         System.out.println("1. Ordenar por prioridade");
         System.out.println("2. Ordenar por status de conclusão");
         System.out.println("3. Ordenar por categoria");
+        System.out.println("4. Ordenar por data");
         System.out.print("Escolha uma opção: ");
 
         int sortOption = getOptionFromUser();
@@ -91,6 +92,7 @@ public class TaskView {
             case 1 -> new SortByPriority();
             case 2 -> new SortByCompletionStatus();
             case 3 -> new SortByCategory();
+            case 4 -> new SortByDate();
             default -> {
                 System.out.println("Opção inválida. Mantendo a ordenação atual.");
                 yield currentSortingStrategy;
