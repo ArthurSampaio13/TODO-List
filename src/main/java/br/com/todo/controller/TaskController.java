@@ -6,9 +6,12 @@ import br.com.todo.controller.validation.Enum.ResultValidationEnum;
 import br.com.todo.controller.validation.TaskInterfaceValidation;
 import br.com.todo.controller.validation.impl.TaskValidation;
 import br.com.todo.db.TaskDAO;
+import br.com.todo.model.Enum.StatusEnum;
 import br.com.todo.model.Task;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TaskController {
     private final TaskInterfaceValidation taskValidation;
@@ -68,6 +71,11 @@ public class TaskController {
     public List<Task> getAllTasks(long userId) {
         List<Task> tasks = database.getTasksByUserId(userId);
         return taskSortingStrategy.sort(tasks);
+    }
+
+    public Map<StatusEnum, Long> getTaskCountByStatus(long userId) {
+        List<Task> tasks = database.getTasksByUserId(userId);
+        return tasks.stream().collect(Collectors.groupingBy(Task::getStatus, Collectors.counting()));
     }
 
 }

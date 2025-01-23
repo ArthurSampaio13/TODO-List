@@ -11,6 +11,7 @@ import br.com.todo.model.Enum.StatusEnum;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TaskView {
@@ -39,7 +40,8 @@ public class TaskView {
                 case 3 -> deleteTask();
                 case 4 -> updateTask();
                 case 5 -> changeSortingStrategy();
-                case 6 -> System.out.println("Saindo...");
+                case 6 -> displayTasksByStatus();
+                case 7 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção inválida.");
             }
         } while (option != 6);
@@ -52,7 +54,8 @@ public class TaskView {
         System.out.println("3. Deletar uma task");
         System.out.println("4. Atualizar uma task");
         System.out.println("5. Alterar a forma de ordenação");
-        System.out.println("6. Sair");
+        System.out.println("6. Exibir tasks por (TODO, Doing e Done)");
+        System.out.println("7. Sair");
         System.out.print("Escolha uma opção: ");
     }
 
@@ -203,5 +206,22 @@ public class TaskView {
         System.out.println("Categoria: " + task.getCategoria());
         System.out.println("Status: " + task.getStatus());
         System.out.println("Data de término: " + task.getDataTermino());
+    }
+
+    private void displayTasksByStatus() {
+        Map<StatusEnum, Long> taskCounts = taskController.getTaskCountByStatus(userId);
+
+        System.out.println("\n---- Contagem de Tasks por Status ----");
+        taskCounts.forEach((status, count) ->
+                System.out.println(status.getDescription() + ": " + count));
+
+        System.out.println("\n---- Tasks por Status ----");
+        for (StatusEnum status : StatusEnum.values()) {
+            System.out.println("\nStatus: " + status.getDescription());
+            List<Task> tasksByStatus = taskController.getAllTasks(userId).stream()
+                    .filter(task -> task.getStatus() == status)
+                    .toList();
+            tasksByStatus.forEach(this::showTask);
+        }
     }
 }
