@@ -29,7 +29,7 @@ Este projeto é uma aplicação de linha de comando para gerenciar tarefas, perm
 1. **Clonando o Repositório:**
    Faça o clone do projeto utilizando o comando:
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/ArthurSampaio13/TODO-List.git
    ```
 2. **Executando a Aplicação:**
    Navegue até o diretório do projeto e execute a classe `Main` diretamente. Todo o código necessário já está configurado.
