@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="login-container" class="container">
+    <h2>Login</h2>
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <p>Não tem uma conta? <a href="#" onclick="showRegister()">Cadastre-se</a></p>
+</div>
+
+<div id="register-container" class="container hidden">
+    <h2>Cadastro</h2>
+    <input type="text" id="register-name" placeholder="Nome">
+    <input type="email" id="register-email" placeholder="Email">
+    <input type="password" id="register-password" placeholder="Senha">
+    <button onclick="register()">Cadastrar</button>
+    <p>Já tem uma conta? <a href="#" onclick="showLogin()">Faça login</a></p>
+</div>
+
+<div id="task-container" class="container hidden">
+    <h2>Gerenciador de Tarefas</h2>
+    <button onclick="showTaskForm()">Nova Tarefa</button>
+    <select id="sort-options" onchange="sortTasks()">
+        <option value="priority">Prioridade</option>
+        <option value="status">Status</option>
+        <option value="category">Categoria</option>
+        <option value="date">Data</option>
+    </select>
+    <ul id="task-list"></ul>
+    <button onclick="logout()">Sair</button>
+</div>
+
+<div id="task-form-container" class="container hidden">
+    <h2 id="task-form-title">Nova Tarefa</h2>
+    <input type="text" id="task-title" placeholder="Título">
+    <input type="text" id="task-desc" placeholder="Descrição">
+    <select id="task-priority">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <select id="task-status">
+        <option value="TODO">TODO</option>
+        <option value="DOING">DOING</option>
+        <option value="DONE">DONE</option>
+    </select>
+    <input type="date" id="task-date">
+    <input type="text" id="task-category" placeholder="Categoria">
+    <button onclick="saveTask()">Salvar</button>
+    <button onclick="hideTaskForm()">Cancelar</button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
